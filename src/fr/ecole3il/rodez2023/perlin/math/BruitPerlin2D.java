@@ -3,12 +3,11 @@ package fr.ecole3il.rodez2023.perlin.math;
 
 /**
  * @author philibert roquart, fainéant
+ *
+ *
  */
 public class BruitPerlin2D extends Bruit2D {
-
-	// Vecteurs de gradient pour le bruit de Perlin
-	private static final float[][] GRADIENT_2D = { { 1, 1 }, { -1, 1 }, { 1, -1 }, { -1, -1 }, { 1, 0 }, { -1, 0 },
-			{ 0, 1 }, { 0, -1 } };
+	private final int[] permutation;
 
 	// Tableau de permutations pour le bruit de Perlin
 	private static final int[] PERMUTATION = { 151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225,
@@ -23,8 +22,16 @@ public class BruitPerlin2D extends Bruit2D {
 			191, 179, 162, 241, 81, 51, 145, 235, 249, 14, 239, 107, 49, 192, 214, 31, 181, 199, 106, 157, 184, 84, 204,
 			176, 115, 121, 50, 45, 127, 4, 150, 254, 138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243, 141, 128, 195,
 			78, 66, 215, 61, 156, 180 };
-
-	private final int[] permutation;
+	// Vecteurs de gradient pour le bruit de Perlin
+	private static final float[][] GRADIENT_2D = {
+			{ 1, 1 },
+			{ -1, 1 },
+			{ 1, -1 },
+			{ -1, -1 },
+			{ 1, 0 },
+			{ -1, 0 },
+			{ 0, 1 },
+			{ 0, -1 } };
 
 	public BruitPerlin2D(long graine, double resolution) {
 		super(graine, resolution);
@@ -33,54 +40,53 @@ public class BruitPerlin2D extends Bruit2D {
 
 	@Override
 	public double bruit2D(double x, double y) {
-		double tempX, tempY;
-		int x0, y0, ii, jj, gi0, gi1, gi2, gi3;
-		double unit = 1.0f / (double) Math.sqrt(2);
-		double tmp, s, t, u, v, Cx, Cy, Li1, Li2;
+		double vecteurX, vecteurY, tmp, interpolation1, interpolation2, interpolation3, interpolation4, Cx, Cy, Li1, Li2;
+		int ligneX, colonneY, indiceI, indiceJ, indiceG0, indiceG1, indiceG2, indiceG3;
+
 		// Adapter pour la résolution
-		x /= resolution;
-		y /= resolution;
+		x /= this.getResolution();
+		y /= this.getResolution();
 
 		// Obtenir les coordonnées de la grille associées à (x, y)
-		x0 = (int) (x);
-		y0 = (int) (y);
+		ligneX = (int) (x);
+		colonneY = (int) (y);
 
 		// Masquage pour récupérer les indices de permutation
-		ii = x0 & 255;
-		jj = y0 & 255;
+		indiceI = ligneX & 255;
+		indiceJ = colonneY & 255;
 
 		// Récupérer les indices de gradient associés aux coins du quadrilatère
-		gi0 = permutation[ii + permutation[jj]] % 8;
-		gi1 = permutation[ii + 1 + permutation[jj]] % 8;
-		gi2 = permutation[ii + permutation[jj + 1]] % 8;
-		gi3 = permutation[ii + 1 + permutation[jj + 1]] % 8;
+		indiceG0 = permutation[indiceI + permutation[indiceJ]] % 8;
+		indiceG1 = permutation[indiceI + 1 + permutation[indiceJ]] % 8;
+		indiceG2 = permutation[indiceI + permutation[indiceJ + 1]] % 8;
+		indiceG3 = permutation[indiceI + 1 + permutation[indiceJ + 1]] % 8;
 
 		// Récupérer les vecteurs de gradient et effectuer des interpolations pondérées
-		tempX = x - x0;
-		tempY = y - y0;
-		s = GRADIENT_2D[gi0][0] * tempX + GRADIENT_2D[gi0][1] * tempY;
+		vecteurX = x - ligneX;
+		vecteurY = y - colonneY;
+		interpolation1 = GRADIENT_2D[indiceG0][0] * vecteurX + GRADIENT_2D[indiceG0][1] * vecteurY;
 
-		tempX = x - (x0 + 1);
-		tempY = y - y0;
-		t = GRADIENT_2D[gi1][0] * tempX + GRADIENT_2D[gi1][1] * tempY;
+		vecteurX = x - (ligneX + 1);
+		vecteurY = y - colonneY;
+		interpolation2 = GRADIENT_2D[indiceG1][0] * vecteurX + GRADIENT_2D[indiceG1][1] * vecteurY;
 
-		tempX = x - x0;
-		tempY = y - (y0 + 1);
-		u = GRADIENT_2D[gi2][0] * tempX + GRADIENT_2D[gi2][1] * tempY;
+		vecteurX = x - ligneX;
+		vecteurY = y - (colonneY + 1);
+		interpolation3 = GRADIENT_2D[indiceG2][0] * vecteurX + GRADIENT_2D[indiceG2][1] * vecteurY;
 
-		tempX = x - (x0 + 1);
-		tempY = y - (y0 + 1);
-		v = GRADIENT_2D[gi3][0] * tempX + GRADIENT_2D[gi3][1] * tempY;
+		vecteurX = x - (ligneX + 1);
+		vecteurY = y - (colonneY + 1);
+		interpolation4 = GRADIENT_2D[indiceG3][0] * vecteurX + GRADIENT_2D[indiceG3][1] * vecteurY;
 
 		// Interpolations pour lisser les valeurs obtenues
-		tmp = x - x0;
-		Cx = 3 * tmp * tmp - 2 * tmp * tmp * tmp;
+		tmp = x - ligneX;
+		Cx = 3 * Math.pow(tmp,2) - 2 * Math.pow(tmp,3);
 
-		Li1 = s + Cx * (t - s);
-		Li2 = u + Cx * (v - u);
+		Li1 = interpolation1 + Cx * (interpolation2 - interpolation1);
+		Li2 = interpolation3 + Cx * (interpolation4 - interpolation3);
 
-		tmp = y - y0;
-		Cy = 3 * tmp * tmp - 2 * tmp * tmp * tmp;
+		tmp = y - colonneY;
+		Cy = 3 * Math.pow(tmp,2) - 2 * Math.pow(tmp,3);
 
 		return Li2 + Cy * (Li2 - Li1);
 	}

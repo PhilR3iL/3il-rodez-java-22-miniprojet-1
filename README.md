@@ -147,6 +147,8 @@ On peut commencer directement par le code de la classe `Bruit2D`. C'est censé �
 
 **Question :** pourquoi l'attribut graine est-il en final ?
 
+**L'attribut graine est en final car ce terme permet de verrouiller la valeur de la graine afin qu'elle ne soit pas modifiée lors du programme.**
+
 Corrigez la classe en ajoutant l'attribut resolution qui manque, ainsi que l'accesseur et le mutateur.
 
 #### Faites du bruit, mais aléatoire
@@ -204,6 +206,10 @@ Voici les terrains que l'on souhaite pouvoir manipuler :
 On pourrait, par exemple, construire une classe pour chaque, qui hériterait de `Terrain`, comme classe mère.
 
 **Question :** Réaliser l'architecture que prendrait la forme d'une telle modélisation sous forme d'un diagramme UML. Quelle serait la différence d'attributs et de méthodes entre ces classes ? Expliquer, en s'appuyant sur un exercice vu en cours, pourquoi c'est une mauvaise idée. Quelle est la solution qu'il faudrait préférer (et que l'on va préférer) ?
+
+![classe abstraite terrain.png](classe%20abstraite%20terrain.png)
+
+****
 
 ### Modélisons le (type de) terrain
 

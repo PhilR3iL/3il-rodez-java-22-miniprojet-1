@@ -9,6 +9,7 @@ public abstract class Bruit2D {
     /** La graine utilisée pour la génération du bruit */
     private final long graine;
 
+
     private double resolution;
     /**
      * Constructeur de la classe Noise2D.
