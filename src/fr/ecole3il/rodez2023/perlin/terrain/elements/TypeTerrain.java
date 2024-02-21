@@ -13,7 +13,7 @@ public enum TypeTerrain {
     MONTAGNE,
     OCEAN,
     PLAINE,
-    TOUNDRA;
+    TOUNDRA, FORET_FEUILLUS;
 
     public BufferedImage getImage() {
         String nomFichier = switch (this) {
@@ -26,6 +26,7 @@ public enum TypeTerrain {
             case OCEAN -> "ocean.png";
             case PLAINE -> "plain.png";
             case TOUNDRA -> "tundra.png";
+            case FORET_FEUILLUS -> null;
         };
         return Utils.chargerTuile(nomFichier);
     }
@@ -41,6 +42,7 @@ public enum TypeTerrain {
             case OCEAN -> "Océan";
             case PLAINE -> "Plaine";
             case TOUNDRA -> "Toundra";
+            case FORET_FEUILLUS -> null;
         };
     }
 }

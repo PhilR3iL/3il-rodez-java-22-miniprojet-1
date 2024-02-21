@@ -5,10 +5,10 @@ import fr.ecole3il.rodez2023.perlin.terrain.carte.Carte;
 import fr.ecole3il.rodez2023.perlin.terrain.elements.Terrain;
 import fr.ecole3il.rodez2023.perlin.terrain.elements.TypeTerrain;
 
-public class VisualisateurTerrain {
+public class VisualiseurTerrain {
     private DetermineurTerrain determineurTerrain;
     private Carte carte;
-    public VisualisateurTerrain(Carte carte, DetermineurTerrain determineurTerrain){
+    public VisualiseurTerrain(Carte carte, DetermineurTerrain determineurTerrain){
         this.carte=carte;
         this.determineurTerrain=determineurTerrain;
     }
