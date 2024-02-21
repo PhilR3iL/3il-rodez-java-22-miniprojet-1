@@ -338,6 +338,8 @@ Il ne vous reste plus qu'à implémenter la classe `VisualiseurTerrainEnonce` da
 
 On considère une valeur comme *basse* si elle est entre 0 et 0.25, moyenne si elle est entre 0.25 et 0.7, et haute sinon.
 
+***L'implémentation actuelle utilise deux fichiers, faites une implémentation à un seul fichier.***
+
 ## Vous en voulez encore ?
 
 ***SI VOUS AVEZ LE TEMPS ET L'ENVIE :***
