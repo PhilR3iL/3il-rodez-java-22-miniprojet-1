@@ -239,6 +239,8 @@ Créez la classe `Terrain` qui comportera trois accesseurs (un pour l'hydrométr
 
 **Question :** quel type utilisez-vous ?
 
+**Jai décidé d'utiliser un double car c'est la variable utilisée dans le projet. L'utiliser ici me permettra de ne pas avoir de perte de données.**
+
 Pour des raisons de simplification, on **ne veut pas** que les valeurs de ces caractéristiques soient faites "à la louche". On s'assurera donc de les limiter : l'hydrométrie et la température doivent être comprises entre 0 et 1, l'altitude entre -1 et 1. On lèvera l'exception `MauvaiseValeurException` si une condition n'est pas respectée. L'exception en question héritera d'une exception **qui détermine qu'un argument est illégal**.
 
 Ajoutez ensuite une méthode qui accepte un visiteur, la méthode `TypeTerrain getTypeTerrain(DetermineurTerrain dt)`.
