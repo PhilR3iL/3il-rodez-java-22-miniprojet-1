@@ -28,6 +28,7 @@ public class Utils {
     public static BufferedImage chargerTuile(String nomFichier) {
         try {
             String imagePath = REPERTOIRE_TUILES + nomFichier;
+            System.out.println(imagePath);
             BufferedImage image = ImageIO.read(new File(imagePath));
             return image;
         } catch (IOException e) {
@@ -47,12 +48,21 @@ public class Utils {
      * 
      * @author philibert roquart, fainéant
      */
+    /*
+    *  Pour i allant de n − 1 à 1 faire :
+       j ← entier aléatoire entre 0 et i
+       échanger a[j] et a[i]
+    * */
     public static int[] melanger(int[] tab, long seed) {
-        // Mélanger le tableau de permutation en utilisant 
-    	// ...
-    	// Bon, je le ferai plus tard, je vais réviser l'espagnol
-    	// Je mets ça, ça marchera bien en attendant
-    	// tant pis
+        int j;  // valeur aleatoire pour la permutation
+        Random rand = new Random(seed);
+        int tmp;
+        for (int i = tab.length -1  ; i > 1 ; i--) {
+            j = rand.nextInt(i);
+            tmp = tab[j] ;
+            tab[j] = tab[i];
+            tab[i] = tmp;
+        }
         return tab;
     }
 
@@ -65,8 +75,7 @@ public class Utils {
      * @author philibert roquart, fainéant
      */
     public static double min(int width, int height) {
-    	// pas le temps, j'ai mes exos de chimie à finir
-    	return 1;
+    	return Math.min(width,height);
     }
 
     /**

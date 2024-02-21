@@ -7,14 +7,20 @@ package fr.ecole3il.rodez2023.perlin.math;
 public abstract class Bruit2D {
     
     /** La graine utilisée pour la génération du bruit */
-    private final long graine;
+    private final long  graine;
+    private double resolution;
+
+
     
     /**
-     * Constructeur de la classe Noise2D.
-     * @param seed2 La graine utilisée pour initialiser le générateur de bruit.
+     * Constructeur de la classe Bruit2D.
+     * @param graine La graine utilisée pour initialiser le générateur de bruit.
+     * @param resolution La resolution utilisée pour le graphique
+     * @ensure this.getGraine().equals(graine) && this.getResolution().equals(resolution)
      */
     public Bruit2D(long graine, double resolution) {
         this.graine = graine;
+        this.resolution = resolution;
     }
     
     /**
@@ -31,6 +37,14 @@ public abstract class Bruit2D {
      */
     public long getGraine() {
         return graine;
+    }
+
+    public double getResolution() {
+        return resolution;
+    }
+
+    public void setResolution(double resolution) {
+        this.resolution = resolution;
     }
 
 }
