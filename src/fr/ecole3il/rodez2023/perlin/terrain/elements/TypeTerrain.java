@@ -13,44 +13,46 @@ public enum TypeTerrain {
     MONTAGNE,
     OCEAN,
     PLAINE,
-    TOUNDRA, FORET_FEUILLUS;
+    TOUNDRA;
 
     public BufferedImage getImage() {
-        String nomFichier = "";
-        switch (this) {
+        String nomFichier ="";
+        switch(this) {
             case COLLINES:
-                nomFichier="hills.png";
+                nomFichier = "hills.png";
                 break;
+
             case DESERT:
-                nomFichier="desert.png";
+                nomFichier = "desert.png";
                 break;
             case FORET_DE_CONIFERES:
-                nomFichier="coniferous_forest.png";
+                nomFichier = "coniferous_forest.png";
                 break;
             case FORET_DE_FEUILLUS:
-                nomFichier="deciduous_forest.png";
+                nomFichier = "deciduous_forest.png";
                 break;
             case MARAIS:
-                nomFichier="marsh.png";
+                nomFichier = "marsh.png";
                 break;
             case MONTAGNE:
-                nomFichier="mountain.png";
+                nomFichier = "mountain.png";
                 break;
             case OCEAN:
-                nomFichier="ocean.png";
+                nomFichier = "ocean.png";
                 break;
             case PLAINE:
-                nomFichier="plain.png";
+                nomFichier = "plain.png";
                 break;
             case TOUNDRA:
-                nomFichier="tundra.png";
+                nomFichier = "tundra.png";
                 break;
         }
         return Utils.chargerTuile(nomFichier);
     }
 
+
     public String toString() {
-        switch (this) {
+        switch(this) {
             case COLLINES:
                 return "Collines";
             case DESERT:

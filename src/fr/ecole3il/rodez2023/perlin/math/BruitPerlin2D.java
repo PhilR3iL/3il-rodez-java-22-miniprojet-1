@@ -1,6 +1,8 @@
 package fr.ecole3il.rodez2023.perlin.math;
 
 
+import fr.ecole3il.rodez2023.perlin.Utils;
+
 /**
  * @author philibert roquart, fainéant
  *
@@ -35,7 +37,7 @@ public class BruitPerlin2D extends Bruit2D {
 
 	public BruitPerlin2D(long graine, double resolution) {
 		super(graine, resolution);
-		this.permutation = PERMUTATION;
+		this.permutation = Utils.melanger(PERMUTATION,getGraine());
 	}
 
 	@Override
@@ -44,8 +46,8 @@ public class BruitPerlin2D extends Bruit2D {
 		int ligneX, colonneY, indiceI, indiceJ, indiceG0, indiceG1, indiceG2, indiceG3;
 
 		// Adapter pour la résolution
-		x /= this.getResolution();
-		y /= this.getResolution();
+		x /= getResolution();
+		y /= getResolution();
 
 		// Obtenir les coordonnées de la grille associées à (x, y)
 		ligneX = (int) (x);
@@ -56,10 +58,10 @@ public class BruitPerlin2D extends Bruit2D {
 		indiceJ = colonneY & 255;
 
 		// Récupérer les indices de gradient associés aux coins du quadrilatère
-		indiceG0 = permutation[indiceI + permutation[indiceJ]&255] % 8;
-		indiceG1 = permutation[indiceI + 1 + permutation[indiceJ]&255] % 8;
-		indiceG2 = permutation[indiceI + permutation[indiceJ + 1]&255] % 8;
-		indiceG3 = permutation[indiceI + 1 + permutation[indiceJ + 1]&255] % 8;
+		indiceG0 = permutation[(indiceI + permutation[indiceJ % 256]) % 256] % 8;
+		indiceG1 = permutation[((indiceI + 1) + permutation[indiceJ % 256]) % 256] % 8;
+		indiceG2 = permutation[(indiceI + permutation[(indiceJ + 1) % 256]) % 256] % 8;
+		indiceG3 = permutation[(indiceI + 1 + permutation[(indiceJ + 1) % 256]) % 256] % 8;
 
 		// Récupérer les vecteurs de gradient et effectuer des interpolations pondérées
 		vecteurX = x - ligneX;

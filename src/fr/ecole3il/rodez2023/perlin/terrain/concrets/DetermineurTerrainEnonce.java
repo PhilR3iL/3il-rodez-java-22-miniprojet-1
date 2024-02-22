@@ -14,7 +14,7 @@ public class DetermineurTerrainEnonce implements DetermineurTerrain {
 				if (temperature <= 0.25) {
 					return TypeTerrain.PLAINE;
 				} else if (temperature <= 0.7) {
-					return TypeTerrain.FORET_FEUILLUS;
+					return TypeTerrain.FORET_DE_FEUILLUS;
 				} else {
 					return TypeTerrain.TOUNDRA;
 				}
