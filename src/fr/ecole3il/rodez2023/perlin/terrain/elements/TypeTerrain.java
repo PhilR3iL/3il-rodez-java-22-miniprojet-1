@@ -16,33 +16,60 @@ public enum TypeTerrain {
     TOUNDRA, FORET_FEUILLUS;
 
     public BufferedImage getImage() {
-        String nomFichier = switch (this) {
-            case COLLINES -> "hills.png";
-            case DESERT -> "desert.png";
-            case FORET_DE_CONIFERES -> "coniferous_forest.png";
-            case FORET_DE_FEUILLUS -> "deciduous_forest.png";
-            case MARAIS -> "marsh.png";
-            case MONTAGNE -> "mountain.png";
-            case OCEAN -> "ocean.png";
-            case PLAINE -> "plain.png";
-            case TOUNDRA -> "tundra.png";
-            case FORET_FEUILLUS -> null;
-        };
+        String nomFichier = "";
+        switch (this) {
+            case COLLINES:
+                nomFichier="hills.png";
+                break;
+            case DESERT:
+                nomFichier="desert.png";
+                break;
+            case FORET_DE_CONIFERES:
+                nomFichier="coniferous_forest.png";
+                break;
+            case FORET_DE_FEUILLUS:
+                nomFichier="deciduous_forest.png";
+                break;
+            case MARAIS:
+                nomFichier="marsh.png";
+                break;
+            case MONTAGNE:
+                nomFichier="mountain.png";
+                break;
+            case OCEAN:
+                nomFichier="ocean.png";
+                break;
+            case PLAINE:
+                nomFichier="plain.png";
+                break;
+            case TOUNDRA:
+                nomFichier="tundra.png";
+                break;
+        }
         return Utils.chargerTuile(nomFichier);
     }
 
     public String toString() {
-        return switch (this) {
-            case COLLINES -> "Collines";
-            case DESERT -> "Désert";
-            case FORET_DE_CONIFERES -> "Forêt de conifères";
-            case FORET_DE_FEUILLUS -> "Forêt de feuillus";
-            case MARAIS -> "Marais";
-            case MONTAGNE -> "Montagne";
-            case OCEAN -> "Océan";
-            case PLAINE -> "Plaine";
-            case TOUNDRA -> "Toundra";
-            case FORET_FEUILLUS -> null;
-        };
+        switch (this) {
+            case COLLINES:
+                return "Collines";
+            case DESERT:
+                return "Désert";
+            case FORET_DE_CONIFERES:
+                return "Forêt de conifères";
+            case FORET_DE_FEUILLUS:
+                return "Forêt de feuillus";
+            case MARAIS:
+                return "Marais";
+            case MONTAGNE:
+                return "Montagne";
+            case OCEAN:
+                return "Océan";
+            case PLAINE:
+                return "Plaine";
+            case TOUNDRA:
+                return "Toundra";
+        }
+        return "";
     }
 }

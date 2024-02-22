@@ -8,6 +8,10 @@ public class Terrain {
     private double hydrometrie;
     private double temperature;
     public Terrain(double altitude,double hydrometrie, double temperature) throws MauvaiseValeurException{
+        hydrometrie = Math.abs(hydrometrie);
+        temperature = Math.abs(temperature);
+
+
         if (altitude<-1 || altitude > 1){
             throw new MauvaiseValeurException(altitude);
         }

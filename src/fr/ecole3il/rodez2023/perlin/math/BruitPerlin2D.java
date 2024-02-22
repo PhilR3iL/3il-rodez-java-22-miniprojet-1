@@ -56,10 +56,10 @@ public class BruitPerlin2D extends Bruit2D {
 		indiceJ = colonneY & 255;
 
 		// Récupérer les indices de gradient associés aux coins du quadrilatère
-		indiceG0 = permutation[indiceI + permutation[indiceJ]] % 8;
-		indiceG1 = permutation[indiceI + 1 + permutation[indiceJ]] % 8;
-		indiceG2 = permutation[indiceI + permutation[indiceJ + 1]] % 8;
-		indiceG3 = permutation[indiceI + 1 + permutation[indiceJ + 1]] % 8;
+		indiceG0 = permutation[indiceI + permutation[indiceJ]&255] % 8;
+		indiceG1 = permutation[indiceI + 1 + permutation[indiceJ]&255] % 8;
+		indiceG2 = permutation[indiceI + permutation[indiceJ + 1]&255] % 8;
+		indiceG3 = permutation[indiceI + 1 + permutation[indiceJ + 1]&255] % 8;
 
 		// Récupérer les vecteurs de gradient et effectuer des interpolations pondérées
 		vecteurX = x - ligneX;
@@ -88,6 +88,6 @@ public class BruitPerlin2D extends Bruit2D {
 		tmp = y - colonneY;
 		Cy = 3 * Math.pow(tmp,2) - 2 * Math.pow(tmp,3);
 
-		return Li2 + Cy * (Li2 - Li1);
+		return Li1 + Cy * (Li2 - Li1);
 	}
 }
