@@ -18,7 +18,7 @@ public class BruitAleatoire extends Bruit2D {
      */
     public BruitAleatoire(long graine, double resolution){
         super(graine,resolution);
-        random = new Random(graine);
+        random = new Random();
     }
 
 

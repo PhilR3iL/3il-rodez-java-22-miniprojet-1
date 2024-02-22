@@ -12,7 +12,7 @@ public class GenerateurPerlin extends GenerateurCarte {
     public GenerateurPerlin(long graine) {
         super(graine);
 
-        // Utilisez la graine pour initialiser les générateurs de bruit de Perlin
+
         bruitAltitude = new BruitPerlin2D(graine * 2, 1.0);
         bruitHydrometrie = new BruitPerlin2D(graine, 1.0);
         bruitTemperature = new BruitPerlin2D(graine * 2, 1.0);
@@ -26,8 +26,11 @@ public class GenerateurPerlin extends GenerateurCarte {
 
         // Utilisez les générateurs de bruit de Perlin pour les trois caractéristiques
         double altitude = bruitAltitude.bruit2D(x, y);
+        System.out.println("altitude" + altitude);
         double hydrometrie = bruitHydrometrie.bruit2D(x, y);
+        System.out.println("hydrometrie" + hydrometrie);
         double temperature = bruitTemperature.bruit2D(x, y);
+        System.out.println("temperature" + temperature);
 
 
         return new Terrain(altitude, hydrometrie, temperature);

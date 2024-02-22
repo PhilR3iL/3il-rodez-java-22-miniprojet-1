@@ -14,12 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import fr.ecole3il.rodez2023.perlin.math.Bruit2D;
 import fr.ecole3il.rodez2023.perlin.math.BruitAleatoire;
 import fr.ecole3il.rodez2023.perlin.math.BruitPerlin2D;
 
 /**
- * 
+ *
  * @author proussille
  * Classe représentant une fenêtre pour générer des images de bruit de Perlin.
  */
@@ -50,7 +49,7 @@ public class VisualiseurBruitPerlin extends JFrame {
         resolutionField = new JTextField(String.valueOf(DEFAULT_RESOLUTION), 10);
 
         JButton generateButton = new JButton("Générer une image");
-        generateButton.addActionListener(new ActionListener() {
+        generateButton.addActionListener(new ActionListener() { // Le bouton générer qui est écoute le bouton
             @Override
             public void actionPerformed(ActionEvent e) {
                 generateImage();
@@ -104,16 +103,19 @@ public class VisualiseurBruitPerlin extends JFrame {
         String seedText = seedField.getText();
         long seed = seedText.isEmpty() ? System.currentTimeMillis() : Long.parseLong(seedText);
 
-        double resolution = DEFAULT_RESOLUTION;
+        double resolution;
         try {
             resolution = Float.parseFloat(resolutionField.getText());
         } catch (NumberFormatException e) {
-            // Utilise la résolution par défaut si la valeur entrée n'est pas valide
-            System.out.println(e);
+            resolution = DEFAULT_RESOLUTION;
         }
 
-        noiseImage = new ImageBruit(new BruitPerlin2D(seed,resolution) );
-        tickImageButton.setEnabled(true); // Désactiver le bouton initialement
+
+        ////////// CODE À MODIFIER
+        noiseImage = new ImageBruit(new BruitPerlin2D(seed, resolution)); // Permet d'appeler la classe et utiliser BruitPerlin2D (car pas de résolution dans le BruitAleatoire)
+
+        ////////// FIN CODE À MODIFIER
+        tickImageButton.setEnabled(true); // Passe le bouton a true pour permettre de générer l'image
         tickImage();
     }
 

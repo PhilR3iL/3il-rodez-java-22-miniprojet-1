@@ -8,7 +8,7 @@ public class SuperBruitPerlin2D extends Bruit2D {
 
     @Override
     public double bruit2D(double x, double y) {
-        return 0; // À remplacer par l'implémentation réelle du bruit de Perlin
+        return 0;
     }
 
     /**

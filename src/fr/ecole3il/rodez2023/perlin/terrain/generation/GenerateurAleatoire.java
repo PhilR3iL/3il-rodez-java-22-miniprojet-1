@@ -1,10 +1,8 @@
 package fr.ecole3il.rodez2023.perlin.terrain.generation;
 
-import fr.ecole3il.rodez2023.perlin.terrain.elements.MauvaiseValeurException;
+import fr.ecole3il.rodez2023.perlin.math.BruitAleatoire;
+
 import fr.ecole3il.rodez2023.perlin.terrain.elements.Terrain;
-
-
-import java.util.Random;
 
 /**
  * Cette classe représente un générateur de carte aléatoire héritant de la classe GenerateurCarte.
@@ -13,14 +11,6 @@ import java.util.Random;
  * @author proussille
  */
 public class GenerateurAleatoire extends GenerateurCarte {
-
-    /**
-     * Constructeur du générateur de carte aléatoire.
-     */
-    public GenerateurAleatoire() {
-        super(new Random().nextLong()); // Utilisez une graine aléatoire
-    }
-
     /**
      * Constructeur du générateur de carte aléatoire avec une graine spécifique.
      *
@@ -33,22 +23,26 @@ public class GenerateurAleatoire extends GenerateurCarte {
     /**
      * Implémente la génération d'un terrain aléatoire à une position donnée.
      *
-     * @param i        La position verticale dans la carte.
-     * @param j        La position horizontale dans la carte.
-     * @param largeur  La largeur totale de la carte.
-     * @param hauteur  La hauteur totale de la carte.
+     * @param i       La position verticale dans la carte.
+     * @param j       La position horizontale dans la carte.
+     * @param largeur La largeur totale de la carte.
+     * @param hauteur La hauteur totale de la carte.
      * @return Le terrain généré aléatoirement pour la position spécifiée.
      */
     @Override
     protected Terrain genererTerrain(int i, int j, int largeur, int hauteur) {
-        Random random = new Random(getGraine());
+        try {
+            BruitAleatoire bruitAleatoire = new BruitAleatoire(this.getGraine(), 1.0);
 
-        // Génération de valeurs aléatoires pour les caractéristiques du terrain
-        double altitude = random.nextDouble(1); // Valeur entre 0 et 1
-        double temperature = random.nextDouble(1); // Valeur entre 0 et 1
-        double hydrometrie = random.nextDouble(1); // Valeur entre 0 et 1
+            // Utilisation du bruit aléatoire pour générer l'altitude, l'hydrométrie et la température
+            double altitude = bruitAleatoire.bruit2D((double) i / largeur, (double) j / hauteur);
+            double hydrometrie = bruitAleatoire.bruit2D((double) i / largeur, (double) j / hauteur);
+            double temperature = bruitAleatoire.bruit2D((double) i / largeur, (double) j / hauteur);
 
-        return new Terrain(altitude, temperature, hydrometrie);
-
+            return new Terrain(altitude, hydrometrie, temperature);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

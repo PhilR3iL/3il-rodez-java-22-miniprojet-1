@@ -49,10 +49,10 @@ public class BruitPerlin2D extends Bruit2D {
 		jj = y0 & 255;
 
 		// Récupérer les indices de gradient associés aux coins du quadrilatère
-		gi0 = permutation[ii + permutation[jj]] % 8;
-		gi1 = permutation[ii + 1 + permutation[jj]] % 8;
-		gi2 = permutation[ii + permutation[jj + 1]] % 8;
-		gi3 = permutation[ii + 1 + permutation[jj + 1]] % 8;
+		gi0 = permutation[ii + permutation[jj] & 255] % 8;
+		gi1 = permutation[ii + 1 + permutation[jj] & 255] % 8;
+		gi2 = permutation[ii + permutation[jj + 1] & 255] % 8;
+		gi3 = permutation[ii + 1 + permutation[jj + 1] & 255] % 8;
 
 		// Récupérer les vecteurs de gradient et effectuer des interpolations pondérées
 		tempX = x - x0;

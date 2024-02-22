@@ -50,7 +50,7 @@ public class Terrain {
     }
 
     TypeTerrain getTypeTerrain(DetermineurTerrain dt){
-        return dt.determinerTerrain(this.altitude, this.hydrometrie, this.temperature);
+        return dt.determinerTerrain(altitude, hydrometrie, temperature);
     }
     public double getHydrometrie() {
         return this.hydrometrie;

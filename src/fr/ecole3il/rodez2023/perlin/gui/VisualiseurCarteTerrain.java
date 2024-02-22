@@ -60,6 +60,7 @@ public class VisualiseurCarteTerrain extends JFrame {
             for (int x = 0; x < largeur; x++) {
                 TypeTerrain type = vte.getTypeTerrain(x, y);
                 BufferedImage image = type.getImage();
+				System.out.println("image :" + image);
                 g.drawImage(image, x * tuileWidth, y * tuileHeight, tuileWidth, tuileHeight, null);
             }
         }
@@ -85,18 +86,21 @@ public class VisualiseurCarteTerrain extends JFrame {
 		cartePanel.addMouseMotionListener(new MouseAdapter() {
 		    @Override
 		    public void mouseMoved(MouseEvent e) {
-		        int tuileWidth = cartePanel.getWidth() / carte.getLargeur();
-		        int tuileHeight = cartePanel.getHeight() / carte.getHauteur();
+				if (carte != null){
+					int tuileWidth = cartePanel.getWidth() / carte.getLargeur();
+					int tuileHeight = cartePanel.getHeight() / carte.getHauteur();
 
-		        int x = e.getX() / tuileWidth;
-		        int y = e.getY() / tuileHeight;
+					int x = e.getX() / tuileWidth;
+					int y = e.getY() / tuileHeight;
 
-		        System.out.println("Coordonnées de la souris - X: " + x + ", Y: " + y);
+					System.out.println("Coordonnées de la souris - X: " + x + ", Y: " + y);
 
-		        if (x >= 0 && x < carte.getLargeur() && y >= 0 && y < carte.getHauteur()) {
-		            TypeTerrain type = vte.getTypeTerrain(x, y);
-		            terrainLabel.setText("Terrain: " + type.toString());
-		        }
+					if (x >= 0 && x < carte.getLargeur() && y >= 0 && y < carte.getHauteur()) {
+						TypeTerrain type = vte.getTypeTerrain(x, y);
+						terrainLabel.setText("Terrain: " + type.toString());
+					}
+				}
+
 		    }
 
 		    @Override
@@ -217,8 +221,7 @@ public class VisualiseurCarteTerrain extends JFrame {
 			if (generateurSelectionne.equals("GenerateurPerlin")) {
 				carte = new Carte("Nouvelle carte", largeur, hauteur, new GenerateurPerlin(graine));
 			} else {
-				carte = new Carte("Nouvelle carte", largeur, hauteur,
-						new GenerateurAleatoire(graine));
+				carte = new Carte("Nouvelle carte", largeur, hauteur, new GenerateurAleatoire(graine));
 			}
 
 			repaint();

@@ -22,11 +22,7 @@ public enum TypeTerrain {
     }
 
     public BufferedImage getImage() {
-        return Utils.chargerTuile(this.getPath());
+        return Utils.chargerTuile(getPath());
     }
 
-    @Override
-    public String toString() {
-        return nomTerrain;
-    }
 }
