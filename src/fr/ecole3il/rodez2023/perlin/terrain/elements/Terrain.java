@@ -8,6 +8,8 @@ public class Terrain {
     private double hydrometrie;
 
     public Terrain(double altitude, double temperature, double hydrometrie) {
+        temperature = Math.abs(temperature);
+        hydrometrie = Math.abs(hydrometrie);
         if(temperature > 1 || temperature < 0)
             throw new MauvaiseValeurException("la valeur temperature entrée n'est pas correcte");
 
