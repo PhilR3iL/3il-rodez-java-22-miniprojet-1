@@ -85,6 +85,8 @@ public class VisualiseurCarteTerrain extends JFrame {
 		cartePanel.addMouseMotionListener(new MouseAdapter() {
 		    @Override
 		    public void mouseMoved(MouseEvent e) {
+				if (carte == null)
+					return;
 		        int tuileWidth = cartePanel.getWidth() / carte.getLargeur();
 		        int tuileHeight = cartePanel.getHeight() / carte.getHauteur();
 

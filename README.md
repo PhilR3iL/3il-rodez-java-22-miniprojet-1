@@ -147,6 +147,8 @@ On peut commencer directement par le code de la classe `Bruit2D`. C'est censé �
 
 **Question :** pourquoi l'attribut graine est-il en final ?
 
+**L'attribut graine est en final car ce terme permet de verrouiller la valeur de la graine afin qu'elle ne soit pas modifiée lors du programme.**
+
 Corrigez la classe en ajoutant l'attribut resolution qui manque, ainsi que l'accesseur et le mutateur.
 
 #### Faites du bruit, mais aléatoire
@@ -205,6 +207,10 @@ On pourrait, par exemple, construire une classe pour chaque, qui hériterait de 
 
 **Question :** Réaliser l'architecture que prendrait la forme d'une telle modélisation sous forme d'un diagramme UML. Quelle serait la différence d'attributs et de méthodes entre ces classes ? Expliquer, en s'appuyant sur un exercice vu en cours, pourquoi c'est une mauvaise idée. Quelle est la solution qu'il faudrait préférer (et que l'on va préférer) ?
 
+![classe abstraite terrain.png](classe%20abstraite%20terrain.png)
+
+****
+
 ### Modélisons le (type de) terrain
 
 Si vous remarquez le dossier `data`, il contient les images des différents types de terrain que l'on va gérer. Voici la description exhaustive :
@@ -232,6 +238,8 @@ La plupart des jeux de type bac à sable utilisent trois valeurs pour générer 
 Créez la classe `Terrain` qui comportera trois accesseurs (un pour l'hydrométrie, un pour la température, et un pour l'altitude) - `getHydrometrie`, `getTemperature` et `getAltitude`. On veut pouvoir rentrer des informations décimales suffisamment précises (au moins en double précision).
 
 **Question :** quel type utilisez-vous ?
+
+**Jai décidé d'utiliser un double car c'est la variable utilisée dans le projet. L'utiliser ici me permettra de ne pas avoir de perte de données.**
 
 Pour des raisons de simplification, on **ne veut pas** que les valeurs de ces caractéristiques soient faites "à la louche". On s'assurera donc de les limiter : l'hydrométrie et la température doivent être comprises entre 0 et 1, l'altitude entre -1 et 1. On lèvera l'exception `MauvaiseValeurException` si une condition n'est pas respectée. L'exception en question héritera d'une exception **qui détermine qu'un argument est illégal**.
 

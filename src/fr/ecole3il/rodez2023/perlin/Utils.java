@@ -48,11 +48,13 @@ public class Utils {
      * @author philibert roquart, fainéant
      */
     public static int[] melanger(int[] tab, long seed) {
-        // Mélanger le tableau de permutation en utilisant 
-    	// ...
-    	// Bon, je le ferai plus tard, je vais réviser l'espagnol
-    	// Je mets ça, ça marchera bien en attendant
-    	// tant pis
+        Random alea=new Random(seed);
+        for (int i=0;i<tab.length;i++){
+            int indexAleatoire=alea.nextInt(tab.length);
+            int temp=tab[i];
+            tab[i]=tab[indexAleatoire];
+            tab[indexAleatoire]=temp;
+        }
         return tab;
     }
 
@@ -64,10 +66,10 @@ public class Utils {
      * 
      * @author philibert roquart, fainéant
      */
-    public static double min(int width, int height) {
-    	// pas le temps, j'ai mes exos de chimie à finir
-    	return 1;
+    public static int min(int width, int height) {
+        return Math.min(width, height);
     }
+
 
     /**
      * Lit le contenu d'un fichier texte et le retourne sous forme de chaîne de caractères.

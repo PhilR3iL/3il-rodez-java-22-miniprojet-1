@@ -14,10 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import fr.ecole3il.rodez2023.perlin.gui.ImageBruit;
 import fr.ecole3il.rodez2023.perlin.math.BruitPerlin2D;
 
 /**
- * 
+ *
  * @author proussille
  * Classe représentant une fenêtre pour générer des images de bruit de Perlin.
  */
@@ -108,11 +109,13 @@ public class VisualiseurBruitPerlin extends JFrame {
         } catch (NumberFormatException e) {
             // Utilise la résolution par défaut si la valeur entrée n'est pas valide
         }
-        
-        
-        ////////// CODE À MODIFIER 
-        noiseImage = new truc;
-        
+
+
+        ////////// CODE À MODIFIER
+        /**@param Papin --> PerlinPapin ?? Objet pour initialiser l'objet ImageBruit */
+        BruitPerlin2D PaPin=new BruitPerlin2D(seed, resolution);
+        noiseImage = new ImageBruit(PaPin);
+
         ////////// FIN CODE À MODIFIER
         tickImageButton.setEnabled(true); // Désactiver le bouton initialement
         tickImage();
